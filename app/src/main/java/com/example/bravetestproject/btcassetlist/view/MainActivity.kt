@@ -49,6 +49,7 @@ class MainActivity : AppCompatActivity(), TimerCallback {
                     if (actionId == EditorInfo.IME_ACTION_GO || actionId == EditorInfo.IME_ACTION_NEXT || actionId == EditorInfo.IME_ACTION_DONE) {
                         Util.hideKeyboard(this@MainActivity)
                         binding.toolbar.etSearch.visibility = View.GONE
+                        binding.toolbar.etSearch.text?.clear()
                     }
                     false
                 }
