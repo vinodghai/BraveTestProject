@@ -106,8 +106,11 @@ class MainActivity : AppCompatActivity(), TimerCallback {
                     binding.progressCircular.visibility = View.GONE
                     binding.toolbar.ivMenu.visibility = View.VISIBLE
                     binding.toolbar.ivSearch.visibility = View.VISIBLE
-                    adapter = BtcAssetAdapter(it.response.btcAssetList)
-                    binding.rvBtcAssetList.adapter = adapter
+                    if (adapter == null) {
+                        adapter = BtcAssetAdapter(it.response.btcAssetList)
+                        binding.rvBtcAssetList.adapter = adapter
+                    } else
+                        adapter?.let { it.notifyItemRangeChanged(0, it.itemCount) }
                 }
             }
         }
