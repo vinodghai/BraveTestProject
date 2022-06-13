@@ -1,11 +1,12 @@
 <resources>
     <string name="app_name">BraveTestProject</string>
     <string name="crypto">Crypto</string>
-    <string name="assets">Assets</string>
     <string name="bitcoin">Bitcoin</string>
     <string name="dummy_amount_usd">$55,432.00</string>
     <string name="sort_by_amount">Sort by Amount</string>
     <string name="help_page">Help Page</string>
     <string name="amount_btc">%s BTC</string>
     <string name="amount_usd">$%s</string>
+    <string name="jetpack_compose">Jetpack Compose</string>
+    <string name="without_jetpack_compose">without jetpack compose</string>
 </resources>

@@ -3,6 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/vinod/AndroidStudioProjects/BraveTestProject/app/src/main/res/layout/activity_main.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/vinod/AndroidStudioProjects/BraveTestProject/app/src/main/res/layout/btc_asset_item_view.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/vinod/AndroidStudioProjects/BraveTestProject/app/src/main/res/layout/toolbar.xml" value="0.14130434782608695" />
+        <entry key="..\:/Users/vinod/AndroidStudioProjects/BraveTestProject/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
+        <entry key="..\:/Users/vinod/AndroidStudioProjects/BraveTestProject/jetpackcomposeassignment/src/main/res/drawable/ic_search.xml" value="0.1" />
+        <entry key="..\:/Users/vinod/AndroidStudioProjects/BraveTestProject/jetpackcomposeassignment/src/main/res/layout/activity_main.xml" value="0.14666666666666667" />
+        <entry key="..\:/Users/vinod/AndroidStudioProjects/BraveTestProject/jetpackcomposeassignment/src/main/res/layout/toolbar.xml" value="0.14130434782608695" />
+        <entry key="..\:/Users/vinod/AndroidStudioProjects/BraveTestProject/jetpackcomposeassignment/src/main/res/menu/option_menu.xml" value="0.203125" />
         <entry key="app/src/main/res/drawable/ic_baseline_menu_24.xml" value="0.222" />
         <entry key="app/src/main/res/drawable/ic_btc.xml" value="0.222" />
         <entry key="app/src/main/res/drawable/ic_eth.xml" value="0.222" />

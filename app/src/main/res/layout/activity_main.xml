@@ -1,71 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/cardview_shadow_start_color"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="@android:color/transparent"
     tools:context=".btcassetlist.view.MainActivity">
 
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/toolbar" />
-
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/groupContent"
-        android:layout_width="wrap_content"
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="tvAssets,rvBtcAssetList" />
+        android:layout_gravity="center"
+        android:onClick="openCompose"
+        android:text="@string/jetpack_compose" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvAssets"
-        android:layout_width="0dp"
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="14dp"
-        android:text="@string/assets"
-        android:textColor="@color/black"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvBtcAssetList"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="6dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="6dp"
-        android:orientation="vertical"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvAssets"
-        tools:itemCount="4"
-        tools:listitem="@layout/btc_asset_item_view" />
-
-    <ProgressBar
-        android:id="@+id/progressCircular"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:indeterminate="true"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:contentDescription="@string/help_page"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_margin="16dp" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_gravity="center"
+        android:layout_marginTop="12dp"
+        android:onClick="openWithoutCompose"
+        android:text="@string/without_jetpack_compose" />
+</androidx.appcompat.widget.LinearLayoutCompat>
