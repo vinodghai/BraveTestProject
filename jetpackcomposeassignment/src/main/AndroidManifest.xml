@@ -3,7 +3,9 @@
     package="com.example.jetpackcomposeassignment">
 
     <application>
-        <activity android:name=".btcassetlist.view.WithoutComposeActivity" />
-        <activity android:name=".compose.CryptoComposeActivity" />
+        <activity
+            android:name=".btcassetlist.view.WithoutComposeActivity"
+            android:theme="@style/Theme.AppCompat" />
+        <!--<activity android:name=".compose.CryptoComposeActivity" />-->
     </application>
 </manifest>

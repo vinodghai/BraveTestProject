@@ -2,16 +2,15 @@ package com.example.jetpackcomposeassignment.btcassetlist.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.jetpackcomposeassignment.BraveApp
 import com.example.jetpackcomposeassignment.ResponseState
 import com.example.jetpackcomposeassignment.btcassetlist.error.BraveError
 import com.example.jetpackcomposeassignment.btcassetlist.response.BtcAssetCallback
 import com.example.jetpackcomposeassignment.btcassetlist.response.BtcAssetResponse
 import com.example.jetpackcomposeassignment.repository.NetworkRepository
-import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 
-@HiltViewModel
-class BtcAssetsViewModel @Inject constructor(private val networkRepository: NetworkRepository) :
+//@HiltViewModel
+class BtcAssetsViewModel /*@Inject*/ /*constructor(private val networkRepository: NetworkRepository)*/ :
     ViewModel() {
 
     val btcAssetResponseLiveData: MutableLiveData<ResponseState<BtcAssetResponse>> =
@@ -19,7 +18,7 @@ class BtcAssetsViewModel @Inject constructor(private val networkRepository: Netw
 
     fun fetchBtcAssets() {
         btcAssetResponseLiveData.value = ResponseState.LOADING()
-        networkRepository.fetchBtcAssetList(object : BtcAssetCallback {
+        BraveApp.networkRepository.fetchBtcAssetList(object : BtcAssetCallback {
             override fun onSuccess(response: BtcAssetResponse) {
                 try {
 //                val timeStamp = Timestamp(System.currentTimeMillis()).toString()

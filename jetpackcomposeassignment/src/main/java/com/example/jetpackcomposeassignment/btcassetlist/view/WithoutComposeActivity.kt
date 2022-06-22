@@ -5,29 +5,33 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatEditText
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.PopupMenu
+import androidx.constraintlayout.widget.Group
 import androidx.core.widget.doOnTextChanged
+import androidx.recyclerview.widget.RecyclerView
 import com.example.jetpackcomposeassignment.*
 import com.example.jetpackcomposeassignment.btcassetlist.adapter.BtcAssetAdapter
 import com.example.jetpackcomposeassignment.btcassetlist.viewmodel.BtcAssetsViewModel
-import com.example.jetpackcomposeassignment.databinding.ActivityWithoutComposeBinding
-import dagger.hilt.android.AndroidEntryPoint
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
-@AndroidEntryPoint
+//@AndroidEntryPoint
 class WithoutComposeActivity : AppCompatActivity(), TimerCallback {
-    private var _binding: ActivityWithoutComposeBinding? = null
-    private val binding get() = _binding!!
+    /* private var _binding: ActivityWithoutComposeBinding? = null
+     private val binding get() = _binding!!*/
     private val viewModel: BtcAssetsViewModel by viewModels()
     private var adapter: BtcAssetAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding = ActivityWithoutComposeBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        //_binding = ActivityWithoutComposeBinding.inflate(layoutInflater)
+        setContentView(/*binding.root*/R.layout.activity_without_compose)
         supportActionBar?.hide()
         setupResponseStates()
         viewModel.fetchBtcAssets()
@@ -38,8 +42,8 @@ class WithoutComposeActivity : AppCompatActivity(), TimerCallback {
     }
 
     private fun setSearchBehavior() {
-        binding.toolbar.ivSearch.setOnClickListener {
-            with(binding.toolbar.etSearch) {
+        findViewById<AppCompatImageView>(R.id.ivSearch).setOnClickListener {
+            with(findViewById<AppCompatEditText>(R.id.etSearch)) {
                 visibility = View.VISIBLE
                 requestFocus()
                 doOnTextChanged { text, _, _, _ ->
@@ -50,8 +54,8 @@ class WithoutComposeActivity : AppCompatActivity(), TimerCallback {
                 setOnEditorActionListener { _, actionId, event ->
                     if (actionId == EditorInfo.IME_ACTION_GO || actionId == EditorInfo.IME_ACTION_NEXT || actionId == EditorInfo.IME_ACTION_DONE) {
                         Util.hideKeyboard(this@WithoutComposeActivity)
-                        binding.toolbar.etSearch.visibility = View.GONE
-                        binding.toolbar.etSearch.text?.clear()
+                        this.visibility = View.GONE
+                        this.text?.clear()
                     }
                     false
                 }
@@ -60,8 +64,8 @@ class WithoutComposeActivity : AppCompatActivity(), TimerCallback {
     }
 
     private fun setMenu() {
-        binding.toolbar.ivMenu.setOnClickListener {
-            val popupMenu = PopupMenu(this@WithoutComposeActivity, binding.toolbar.ivMenu)
+        findViewById<AppCompatImageView>(R.id.ivMenu).setOnClickListener {
+            val popupMenu = PopupMenu(this@WithoutComposeActivity, it)
             popupMenu.menuInflater.inflate(R.menu.option_menu, popupMenu.getMenu())
             popupMenu.setOnMenuItemClickListener {
                 adapter?.sort()
@@ -72,7 +76,7 @@ class WithoutComposeActivity : AppCompatActivity(), TimerCallback {
     }
 
     private fun setFloatingActionButtonBehavior() {
-        binding.fab.setOnClickListener {
+        findViewById<FloatingActionButton>(R.id.fab).setOnClickListener {
             val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://brave.com/wallet/"))
             browserIntent.resolveActivity(packageManager)?.let { startActivity(browserIntent) }
         }
@@ -80,38 +84,42 @@ class WithoutComposeActivity : AppCompatActivity(), TimerCallback {
 
     private fun setupResponseStates() {
         viewModel.btcAssetResponseLiveData.observe(this) {
+            val groupContent = findViewById<Group>(R.id.groupContent)
+            val progressCircular = findViewById<ProgressBar>(R.id.progressCircular)
+            val ivMenu = findViewById<AppCompatImageView>(R.id.ivMenu)
+            val ivSearch = findViewById<AppCompatImageView>(R.id.ivSearch)
             when (it) {
                 is ResponseState.INITIAL -> {
-                    binding.groupContent.visibility = View.VISIBLE
-                    binding.progressCircular.visibility = View.GONE
-                    binding.toolbar.ivMenu.visibility = View.VISIBLE
-                    binding.toolbar.ivSearch.visibility = View.VISIBLE
+                    groupContent.visibility = View.VISIBLE
+                    progressCircular.visibility = View.GONE
+                    ivMenu.visibility = View.VISIBLE
+                    ivSearch.visibility = View.VISIBLE
                 }
 
                 is ResponseState.LOADING -> {
-                    binding.groupContent.visibility = View.GONE
-                    binding.progressCircular.visibility = View.VISIBLE
-                    binding.toolbar.ivMenu.visibility = View.GONE
-                    binding.toolbar.ivSearch.visibility = View.GONE
+                    groupContent.visibility = View.GONE
+                    progressCircular.visibility = View.VISIBLE
+                    ivMenu.visibility = View.GONE
+                    ivSearch.visibility = View.GONE
                 }
 
                 is ResponseState.FAILURE -> {
-                    binding.groupContent.visibility = View.GONE
-                    binding.progressCircular.visibility = View.GONE
-                    binding.toolbar.ivMenu.visibility = View.GONE
-                    binding.toolbar.ivSearch.visibility = View.GONE
+                    groupContent.visibility = View.GONE
+                    progressCircular.visibility = View.GONE
+                    ivMenu.visibility = View.GONE
+                    ivSearch.visibility = View.GONE
                     if (adapter == null)
                         Toast.makeText(this, it.error.message, Toast.LENGTH_LONG).show()
                 }
 
                 is ResponseState.SUCCESS -> {
-                    binding.groupContent.visibility = View.VISIBLE
-                    binding.progressCircular.visibility = View.GONE
-                    binding.toolbar.ivMenu.visibility = View.VISIBLE
-                    binding.toolbar.ivSearch.visibility = View.VISIBLE
+                    groupContent.visibility = View.VISIBLE
+                    progressCircular.visibility = View.GONE
+                    ivMenu.visibility = View.VISIBLE
+                    ivSearch.visibility = View.VISIBLE
                     if (adapter == null) {
                         adapter = BtcAssetAdapter(it.response.btcAssetList)
-                        binding.rvBtcAssetList.adapter = adapter
+                        findViewById<RecyclerView>(R.id.rvBtcAssetList).adapter = adapter
                     } else
                         adapter?.let { it.notifyItemRangeChanged(0, it.itemCount) }
                 }
@@ -122,10 +130,5 @@ class WithoutComposeActivity : AppCompatActivity(), TimerCallback {
     override fun onFinish() {
         super.onFinish()
         viewModel.fetchBtcAssets()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
     }
 }

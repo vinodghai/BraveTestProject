@@ -11,7 +11,7 @@ class BtcAssetResponse(
     val bitcoin: BtcAssetPrice,
     val ethereum: BtcAssetPrice,
     val binancecoin: BtcAssetPrice,
-    @SerializedName("basic-attention-token") val bat: BtcAssetPrice
+    /*@SerializedName("basic-attention-token")*/ val bat: BtcAssetPrice
 ) : Serializable {
     val btcAssetList
         get() = mutableListOf(

@@ -2,9 +2,9 @@ package com.example.jetpackcomposeassignment
 
 import android.app.Application
 import android.content.Context
-import dagger.hilt.android.HiltAndroidApp
+import com.example.jetpackcomposeassignment.repository.NetworkRepository
 
-@HiltAndroidApp
+//@HiltAndroidApp
 class BraveApp : Application() {
 
     override fun onCreate() {
@@ -13,6 +13,9 @@ class BraveApp : Application() {
     }
 
     companion object {
+
+        val networkRepository = NetworkRepository()
+
         private lateinit var INSTANCE: BraveApp
 
         fun getAppContext(): Context = INSTANCE.applicationContext
